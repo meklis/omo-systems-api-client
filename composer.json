@@ -1,0 +1,25 @@
+{
+    "name": "meklis/omo-systems-api-client",
+    "description": "Library for working with OMO.Systems APIs",
+    "type": "library",
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "karriere/json-decoder": "^2.2"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^4.1@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Max Boyar",
+            "email": "max.boyar.a@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OmoSystemsApi\\": "src/"
+        }
+    }
+}
