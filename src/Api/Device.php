@@ -4,7 +4,7 @@
 namespace OmoSystemsApi\Api;
 
 
-class Device  extends DefaultApi
+class Device  extends AbstractApi
 {
     protected $base_uri = "/commands/device";
     public function revoke($deviceId, $receiverId, $receiverPhone) {
@@ -17,7 +17,6 @@ class Device  extends DefaultApi
     }
 
     public function share($deviceId, $receiverPhone, $newDeviceLabel = "", $canShare = false, $setAsOwner = false) {
-
         $query = [
             'deviceId' => $deviceId,
             'receiverPhone' => $receiverPhone,
@@ -34,6 +33,5 @@ class Device  extends DefaultApi
             'desired' => $desired,
         ];
         return $this->api->call("POST", "{$this->base_uri}/update", $query);
-
     }
 }

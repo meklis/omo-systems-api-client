@@ -12,7 +12,7 @@ use OmoSystemsApi\Exceptions\AuthException;
 class Auth
 {
     protected $credentials = [];
-    public static $authServer = "";
+    public static $authServer = "https://ryy1xcx7jh.execute-api.eu-west-1.amazonaws.com/v6/access-token";
     protected $http;
     function __construct($secret, $username, $password, $authServer = "")
     {

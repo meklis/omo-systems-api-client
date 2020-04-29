@@ -4,12 +4,15 @@
 namespace OmoSystemsApi;
 
 
+use OmoSystemsApi\Exceptions\AuthException;
 use OmoSystemsApi\Models\ApiResponse;
 
 class ApiCaller
 {
+    /**
+     * @var \GuzzleHttp\Client
+     */
     protected $http;
-    protected static $authTokenHeaderName = "";
     protected static $apiAddr = "https://api.omo.systems";
 
     /**
@@ -39,11 +42,14 @@ class ApiCaller
         if($method == "GET") {
             $params['query'] = $data;
         } else {
-            $params['json'] = $data;
+            $params['query'] = $data;
         }
         $data = $this->http->request($method, $uri, $params);
         if($data->getStatusCode() >= 500) {
             throw new \Exception("Error working with OMO API: {$data->getReasonPhrase()}", $data->getStatusCode());
+        }
+        if(in_array($data->getStatusCode(), [401])) {
+            throw new AuthException($data->getReasonPhrase(), $data->getStatusCode());
         }
         return ApiResponse::init($data);
     }
